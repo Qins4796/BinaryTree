@@ -15,7 +15,7 @@ void binaryTreeTraverseInOrder(Node *root){
   Stack *stack = stackNew();
   Node *currentNode = root;
   
-  printf("\ncreated a stack\n");
+  // printf("\ncreated a stack\n");
   currentNode->state = ENTERED_NODE;
   while(currentNode!= NULL){
     if(currentNode->state == ENTERED_NODE){
@@ -24,32 +24,32 @@ void binaryTreeTraverseInOrder(Node *root){
         currentNode->state = VISITED_RIGHT_NODE;
       }
       else if(currentNode->left != NULL){ //left value
-        printf("left\n");
+        // printf("left\n");
         stackPush(stack,currentNode);
         currentNode = currentNode->left;
         currentNode->state = ENTERED_NODE;
       }
       else if(currentNode->right != NULL){ //right value
-        printf("right\n");
+        // printf("right\n");
         currentNode->state = VISITED_LEFT_NODE;}
       else currentNode->state = UNKNOWN_NODE_STATE;
     } 
     if(currentNode->state == VISITED_LEFT_NODE){
-    printf("VISITED_LEFT_NODE\n");
+    // printf("VISITED_LEFT_NODE\n");
       if(currentNode->right != NULL){
         display(currentNode->data);
         stackPush(stack,currentNode);
         currentNode = currentNode->right;
         currentNode->state = ENTERED_NODE;
-        printf("right enter\n");
+        // printf("right enter\n");
       }
       else{ currentNode->state = VISITED_RIGHT_NODE;
         display(currentNode->data);
-        printf("right done\n");
+        // printf("right done\n");
       }
     } 
     if(currentNode->state == VISITED_RIGHT_NODE){
-    printf("pop here\n");
+    // printf("pop here\n");
 
     currentNode = stackPop(stack);
 
@@ -64,5 +64,15 @@ void binaryTreeTraverseInOrder(Node *root){
   }
   
   stackDel(stack);
-  printf("deleted a stack\n");
+  // printf("deleted a stack\n");
+}
+
+void binaryTreePrintInOrder(Node *node){
+  
+  if(node !=NULL){
+    binaryTreePrintInOrder(node->left);
+    display(node->data);
+    // printf("%d\n",node->data);
+    binaryTreePrintInOrder(node->right);
+  }
 }
